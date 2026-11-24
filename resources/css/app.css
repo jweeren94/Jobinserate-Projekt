@@ -1,1 +1,47 @@
+body {
+    grid-template-columns: 1fr minmax(0, 1200px) 1fr;
+}
 
+header {
+    margin: 0 !important;
+    padding: 0.8rem 2rem !important;
+    max-width: 100% ;
+}
+
+.site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.site-nav a,
+.site-nav form,
+.site-nav button {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.job-search {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+}
+
+.login-page {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.login-page-fieldset {
+    width: 50%;
+}

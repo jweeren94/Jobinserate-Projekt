@@ -1,11 +1,13 @@
 <header>
-    <nav>
+    <nav class='site-nav'>
+        <div class='nav-left'>
         <a href="/">Jobbörse</a>
-        <a href="/jobs">Stellenanzeigen</a>
+        </div>
 
+        <div class='nav-right'>
         @guest
-            <a href="/login">Login</a>
-            <a href="/register">Registrieren</a>
+            <a href="/loginRegister">Einloggen oder Registrieren</a>
+
         @endguest
 
         @auth
@@ -16,5 +18,6 @@
                 <button type="submit">Logout</button>
             </form>
         @endauth
+        </div>
     </nav>
 </header>
