@@ -9,10 +9,11 @@
 <div class='login-page'>
     <fieldset class="login-page-fieldset">
         <legend>Login</legend>
-        <form>
-            <input type="email" placeholder="E-Mail">
+        <form action="/login" method="POST">
+            @csrf
+            <input name="loginEmail" type="email" placeholder="E-Mail">
             <br>
-            <input type="password" placeholder="Passwort">
+            <input name="loginPassword" type="password" placeholder="Passwort">
             <hr>
             <button type="submit">Einloggen</button>
         </form>
@@ -20,12 +21,12 @@
 
     <fieldset class="login-page-fieldset">
         <legend>Registrieren</legend>
-        <form>
-            <input type="text" placeholder="Name">
+        <form action="/register" method="POST">
+            <input name="name" type="text" placeholder="Name">
             <br>
-            <input type="email" placeholder="E-Mail">
+            <input name="email" type="email" placeholder="E-Mail">
             <br>
-            <input type="password" placeholder="Passwort">
+            <input name="password" type="password" placeholder="Passwort">
             <hr>
             <button type="submit">Registrieren</button>
         </form>
