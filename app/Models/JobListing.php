@@ -9,4 +9,9 @@ class JobListing extends Model
 {
     /** @use HasFactory<\Database\Factories\JobFactory> */
     use HasFactory;
+
+    public function company() {
+        return $this->belongsTo(Company::class);
+    }
+
 }

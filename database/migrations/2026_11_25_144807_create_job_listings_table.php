@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('job_listings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+            $table->string('title');
+            $table->text('description');
+            $table->string('location');
+            $table->string('employment_type');
+            $table->timestamp('expires_at');
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }
