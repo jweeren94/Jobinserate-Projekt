@@ -11,7 +11,11 @@
         @endguest
 
         @auth
-            <a href="/dashboard">Mein Konto</a>
+            @if (Auth::user()->company)
+                <a href="/myJoblistings">Meine Stellenanzeigen</a>
+            @endif
+
+            <a href="/konto">Mein Konto</a>
 
             <form action="/logout" method="POST">
                 @csrf

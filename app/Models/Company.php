@@ -18,4 +18,11 @@ class Company extends Model
         return $this->hasMany(JobListing::class);
     }
 
+    protected $fillable = [
+        'name',
+        'description',
+        'city',
+        'website',
+        'contact_email',
+    ];
 }

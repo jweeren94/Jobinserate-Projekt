@@ -32,11 +32,6 @@ class UserController extends Controller
 
         if (auth::attempt(['email' => $loginData['loginEmail'], 'password' => $loginData['loginPassword']])) {
             $request->session()->regenerate();
-        } else {
-            return back()->withErrors([
-                'loginError' => 'The provided credentials do not match our records.',
-            ]);
-
         }
 
         return redirect('/');
@@ -46,6 +41,24 @@ class UserController extends Controller
     public function logout() {
         auth::logout();
         return redirect('/');
+    }
+
+    public function update(Request $request){
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+        ]);
+
+        $user->update($validated);
+
+        return redirect('/konto')
+            ->with('success', 'Kontodaten wurden aktualisiert.');
     }
 
 }
