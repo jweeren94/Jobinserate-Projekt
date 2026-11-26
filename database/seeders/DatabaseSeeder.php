@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Company;
+use App\Models\JobListing;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,9 +20,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        // 10 Unternehmen erstellen mit jeweils 5 Job Listings
+        Company::factory(10)->has(JobListing::factory(5), 'jobListings')->create();
+
+        /*User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        */
     }
 }

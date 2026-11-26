@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 /**
  * @extends Factory<Company>
@@ -18,7 +19,12 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'name' => fake()->company(),
+            'description' => fake()->paragraph(),
+            'website' => fake()->url(),
+            'contact_email' => fake()->companyEmail(),
+            'city' => fake()->city(),
         ];
     }
 }
