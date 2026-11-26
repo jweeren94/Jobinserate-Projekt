@@ -14,4 +14,12 @@ class JobListing extends Model
         return $this->belongsTo(Company::class);
     }
 
+    protected $fillable = [
+    'title',
+    'description',
+    'location',
+    'employment_type',
+    'expires_at',
+    'is_published',
+    ];
 }

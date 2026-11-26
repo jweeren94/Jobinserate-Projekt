@@ -29,3 +29,8 @@ Route::put('/updateUser', [UserController::class, 'update'])->middleware('auth')
 //create, update für Company
 Route::put('/updateCompany', [CompanyController::class, 'update'])->middleware('auth');
 Route::post('/createCompany', [CompanyController::class, 'createCompany'])->middleware('auth');
+
+
+Route::get('/myJoblistings', [JobListingController::class, 'indexMyJoblistings'])->middleware('auth');
+Route::post('/createJobListing', [JobListingController::class, 'createJobListing'])->middleware('auth');
+Route::patch('/jobListing/{jobListing}/togglePublish', [JobListingController::class, 'togglePublish'])->middleware('auth');
