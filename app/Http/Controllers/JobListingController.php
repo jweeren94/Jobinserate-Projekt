@@ -12,8 +12,25 @@ class JobListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function indexMyJoblistings(Request $request)
-    {
+
+    public function index(Request $request){
+        $jobListings = JobListing::with('company')
+            ->where('is_published', true)
+            ->whereDate('expires_at', '>=', today())
+            ->when($request->filled('location'), function ($query) use ($request) {
+                $query->where('location', 'like', '%' . $request->location . '%');
+            })
+            ->when($request->filled('employment_type'), function ($query) use ($request) {
+                $query->where('employment_type', $request->employment_type);
+            })
+            ->latest()
+            ->get();
+
+        return view('welcome', compact('jobListings'));
+    }
+
+
+    public function indexMyJoblistings(Request $request){
         $company = $request->user()->company;
 
         if (!$company) {
@@ -63,9 +80,14 @@ class JobListingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(JobListing $jobListing)
-    {
-        //
+    public function show(JobListing $jobListing){
+        if (!$jobListing->is_published || $jobListing->expires_at < today()) {
+            abort(404);
+        }
+
+        $jobListing->load('company');
+
+        return view('jobListingDetails', compact('jobListing'));
     }
 
     /**
@@ -79,9 +101,23 @@ class JobListingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJobListingRequest $request, JobListing $jobListing)
-    {
-        //
+    public function update(Request $request, JobListing $jobListing){
+        // Prüfen, ob die Stellenanzeige dem eingeloggten Unternehmen gehört
+        if ($request->user()->company->id !== $jobListing->company_id) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'location' => 'required|string|max:255',
+            'employment_type' => 'required|in:Fulltime,Parttime',
+            'expires_at' => 'required|date|after:today',
+        ]);
+
+        $jobListing->update($validated);
+
+        return redirect('/myJoblistings');
     }
 
     /**

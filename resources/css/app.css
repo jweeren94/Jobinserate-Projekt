@@ -45,3 +45,14 @@ header {
 .login-page-fieldset {
     width: 50%;
 }
+
+.job-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.job-card h3 {
+    margin-top: 0;
+}

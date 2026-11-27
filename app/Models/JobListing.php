@@ -22,4 +22,11 @@ class JobListing extends Model
     'expires_at',
     'is_published',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'expires_at' => 'date',
+        ];
+    }
 }

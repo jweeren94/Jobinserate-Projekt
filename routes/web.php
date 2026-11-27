@@ -6,9 +6,8 @@ use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\CompanyController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [JobListingController::class, 'index']);
+Route::get('/jobListing/{jobListing}', [JobListingController::class, 'show'])->name('jobListings.show');
 
 Route::get('/loginRegister', function () {
     return view('loginRegister');
@@ -34,3 +33,4 @@ Route::post('/createCompany', [CompanyController::class, 'createCompany'])->midd
 Route::get('/myJoblistings', [JobListingController::class, 'indexMyJoblistings'])->middleware('auth');
 Route::post('/createJobListing', [JobListingController::class, 'createJobListing'])->middleware('auth');
 Route::patch('/jobListing/{jobListing}/togglePublish', [JobListingController::class, 'togglePublish'])->middleware('auth');
+Route::patch('/jobListing/{jobListing}', [JobListingController::class, 'update'])->middleware('auth');
